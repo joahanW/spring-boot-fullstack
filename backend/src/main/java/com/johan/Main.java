@@ -19,6 +19,7 @@ public class Main {
 //        for (String beanDefinitionName : beanDefinitionNames) {
 //            System.out.println(beanDefinitionName);
 //        }
+
     }
 
     @Bean
