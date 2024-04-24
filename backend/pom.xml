@@ -21,6 +21,8 @@
 	<properties>
 		<java.version>17</java.version>
 		<docker.username>johanwork</docker.username>
+		<docker.image.name>johan-api</docker.image.name>
+		<docker.image.tag/>
 	</properties>
 
 	<dependencies>
@@ -175,7 +177,8 @@
 						</platforms>
 					</from>
 					<to>
-						<image>docker.io/${docker.username}/${project.artifactId}:${project.version}</image>
+						<!-- docker.io/johanwork/johan-api/24.04.2024... -->
+						<image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
 						<tags>
 							<tag>latest</tag>
 						</tags>
