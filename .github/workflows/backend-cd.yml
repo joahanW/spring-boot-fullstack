@@ -45,7 +45,7 @@ jobs:
         run: echo "BUILD_NUMBER=$(date '+%d.%m.%Y.%H.%M.%S')" >> $GITHUB_OUTPUT
       - name: Build Package and Push with Maven JIB
         run: mvn -ntp -B verify -Ddocker.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}} jib:build
-            - name: Update Dockerrun.aws.json api image tag with new BUILD_NUMBER
+      - name: Update Dockerrun.aws.json api image tag with new BUILD_NUMBER
         run: |
           echo "Dockerrun.aws.json BEFORE updating tag"
           cat Dockerrun.aws.json
