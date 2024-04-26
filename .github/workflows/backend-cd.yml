@@ -98,7 +98,7 @@ jobs:
       - name: Send Slack Message
         run: >
           curl -X POST -H 'Content-type: application/json' 
-          --data '{"text":"Deployment and commit completed :github_check_mark: :partu_blob:"}' 
+          --data '{"text":"Deployment and commit completed :github_check_mark: :party_blob:"}' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Send Slack Message
         if: always()
