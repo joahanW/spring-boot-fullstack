@@ -23,7 +23,7 @@ public class CustomerJDBCAccessService implements CustomerDao{
     @Override
     public List<Customer> selectAllCustomer() {
         var sql = """
-                SELECT id, name, email, age
+                SELECT id, name, email, age, gender
                 FROM customer
                 """;
         return jdbcTemplate.query(sql,customerRowMapper);
@@ -32,7 +32,7 @@ public class CustomerJDBCAccessService implements CustomerDao{
     @Override
     public Optional<Customer> getByCustomerId(Integer customerId) {
         var sql = """
-                SELECT id, name, email, age
+                SELECT id, name, email, age, gender
                 FROM customer
                 WHERE id = ?
                 """;
@@ -44,10 +44,10 @@ public class CustomerJDBCAccessService implements CustomerDao{
     @Override
     public void insertCustomer(Customer customer) {
         var sql = """
-                INSERT INTO customer (name,email,age)
-                VALUES (?,?,?)
+                INSERT INTO customer (name,email,age,gender)
+                VALUES (?,?,?,?)
                 """;
-        int update = jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getAge());
+        int update = jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getAge(), customer.getGender().name());
         System.out.println("jdbcTemplate.update = " +update);
     }
 
@@ -76,10 +76,10 @@ public class CustomerJDBCAccessService implements CustomerDao{
     public void updateCustomer(Customer customer) {
         var sql = """
                 UPDATE customer
-                SET name=?, email=?, age=?
+                SET name=?, email=?, age=?, gender=?
                 WHERE id = ?
                 """;
-        int update = jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getAge(), customer.getId());
+        int update = jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getAge(), customer.getGender().name(), customer.getId());
         System.out.println("Update Customer result = "+update);
     }
 }

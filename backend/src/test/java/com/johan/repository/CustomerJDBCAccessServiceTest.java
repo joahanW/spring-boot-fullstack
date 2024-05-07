@@ -3,6 +3,7 @@ package com.johan.repository;
 import com.johan.AbstractTestContainers;
 import com.johan.model.Customer;
 import com.johan.model.CustomerRowMapper;
+import com.johan.model.Gender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,8 +32,8 @@ class CustomerJDBCAccessServiceTest extends AbstractTestContainers {
         Customer customer = new Customer(
                 FAKER.name().firstName(),
                 FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID(),
-                20
-        );
+                20,
+                Gender.MALE);
         underTest.insertCustomer(customer);
 
         // When
@@ -51,8 +52,8 @@ class CustomerJDBCAccessServiceTest extends AbstractTestContainers {
         Customer customer = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
         underTest.insertCustomer(customer);
 
         Long id = underTest.selectAllCustomer()
@@ -94,8 +95,8 @@ class CustomerJDBCAccessServiceTest extends AbstractTestContainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                25
-        );
+                25,
+                Gender.MALE);
         underTest.insertCustomer(customer);
 
         // When
@@ -125,8 +126,8 @@ class CustomerJDBCAccessServiceTest extends AbstractTestContainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                25
-        );
+                25,
+                Gender.MALE);
         underTest.insertCustomer(customer);
 
         // When
@@ -147,8 +148,8 @@ class CustomerJDBCAccessServiceTest extends AbstractTestContainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                25
-        );
+                25,
+                Gender.MALE);
         underTest.insertCustomer(customer);
 
         Long id = underTest.selectAllCustomer().stream()
@@ -173,8 +174,8 @@ class CustomerJDBCAccessServiceTest extends AbstractTestContainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                25
-        );
+                25,
+                Gender.MALE);
         underTest.insertCustomer(customer);
 
         Long id = underTest.selectAllCustomer().stream()
@@ -187,8 +188,8 @@ class CustomerJDBCAccessServiceTest extends AbstractTestContainers {
         Customer update = new Customer(
                 "John Doe",
                 "johndoe@gmail.com",
-                88
-        );
+                88,
+                Gender.MALE);
         update.setId(id);
         underTest.updateCustomer(update);
 
@@ -210,8 +211,8 @@ class CustomerJDBCAccessServiceTest extends AbstractTestContainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                25
-        );
+                25,
+                Gender.MALE);
         underTest.insertCustomer(customer);
 
         Long id = underTest.selectAllCustomer().stream()

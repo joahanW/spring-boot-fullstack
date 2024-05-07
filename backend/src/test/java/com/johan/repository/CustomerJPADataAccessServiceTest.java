@@ -1,15 +1,13 @@
 package com.johan.repository;
 
 import com.johan.model.Customer;
-import jakarta.persistence.EntityManager;
+import com.johan.model.Gender;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerJPADataAccessServiceTest {
 
@@ -58,8 +56,8 @@ class CustomerJPADataAccessServiceTest {
     void insertCustomer() {
         // GIVEN
         Customer customer = new Customer(
-                1L, "johan", "johan@gmail.com", 2
-        );
+                1L, "johan", "johan@gmail.com", 2,
+                Gender.MALE);
 
         // When
         underTest.insertCustomer(customer);
@@ -99,8 +97,8 @@ class CustomerJPADataAccessServiceTest {
     void updateCustomer() {
         // GIVEN
         Customer customer = new Customer(
-                1L, "johan", "johan@gmail.com", 2
-        );
+                1L, "johan", "johan@gmail.com", 2,
+                Gender.MALE);
 
         // When
         underTest.updateCustomer(customer);

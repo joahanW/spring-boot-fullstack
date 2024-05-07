@@ -1,5 +1,6 @@
 package com.johan.service;
 
+import com.johan.model.Gender;
 import com.johan.repository.CustomerDao;
 import com.johan.model.Customer;
 import com.johan.model.CustomerRegistrationRequest;
@@ -19,8 +20,8 @@ public class CustomerServiceJDBC {
         Customer customer = new Customer(
             customerRegistrationRequest.email(),
             customerRegistrationRequest.name(),
-            customerRegistrationRequest.age()
-        );
+            customerRegistrationRequest.age(),
+                Gender.MALE);
         customerDao.insertCustomer(customer);
     }
 

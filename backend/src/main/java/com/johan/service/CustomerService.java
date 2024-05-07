@@ -1,5 +1,6 @@
 package com.johan.service;
 
+import com.johan.model.Gender;
 import com.johan.repository.CustomerDao;
 import com.johan.exception.DuplicateResourceException;
 import com.johan.exception.RequestValidationException;
@@ -38,8 +39,8 @@ public CustomerService(@Qualifier("jdbc") CustomerDao customerDao) {
         Customer customer = new Customer(
                 customerRegistrationRequest.name(),
                 customerRegistrationRequest.email(),
-                customerRegistrationRequest.age()
-        );
+                customerRegistrationRequest.age(),
+                customerRegistrationRequest.gender());
         customerDao.insertCustomer(customer);
     }
 

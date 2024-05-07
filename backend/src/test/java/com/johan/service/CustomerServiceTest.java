@@ -5,6 +5,7 @@ import com.johan.exception.RequestValidationException;
 import com.johan.exception.ResourceNotFound;
 import com.johan.model.Customer;
 import com.johan.model.CustomerRegistrationRequest;
+import com.johan.model.Gender;
 import com.johan.repository.CustomerDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,14 +13,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceTest {
@@ -50,8 +48,8 @@ class CustomerServiceTest {
         // GIVEN
         Long id = 1L;
         Customer customer = new Customer(
-                id, "Johan", "johan@gmail.com",20
-        );
+                id, "Johan", "johan@gmail.com",20,
+                Gender.MALE);
         Mockito.when(customerDao.getByCustomerId(id.intValue()))
                 .thenReturn(Optional.of(customer));
 
@@ -68,8 +66,8 @@ class CustomerServiceTest {
         // GIVEN
         Long id = 1L;
         Customer customer = new Customer(
-                id, "Johan", "johan@gmail.com",20
-        );
+                id, "Johan", "johan@gmail.com",20,
+                Gender.MALE);
         Mockito.when(customerDao.getByCustomerId(id.intValue()))
                 .thenReturn(Optional.empty());
 
@@ -90,7 +88,7 @@ class CustomerServiceTest {
                 .thenReturn(false);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "johan", email, 22
+                "johan", email, 22, Gender.MALE
         );
 
         // When
@@ -117,7 +115,7 @@ class CustomerServiceTest {
                 .thenReturn(true);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "johan", email, 22
+                "johan", email, 22, Gender.MALE
         );
 
         // When
@@ -135,8 +133,8 @@ class CustomerServiceTest {
         int id = 1;
         Mockito.when(customerDao.getByCustomerId(id))
                 .thenReturn(Optional.of(new Customer(
-                        1L, "Johan", "johan@gmail.com",20
-                )));
+                        1L, "Johan", "johan@gmail.com",20,
+                        Gender.MALE)));
 
         // When
         underTest.deleteCustomer(id);
@@ -165,13 +163,13 @@ class CustomerServiceTest {
         // GIVEN
         int id = 1;
         Customer customer = new Customer(
-                "johan", "johan@gmail.com",20
-        );
+                "johan", "johan@gmail.com",20,
+                Gender.MALE);
         Mockito.when(customerDao.getByCustomerId(id))
                 .thenReturn(Optional.of(customer));
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "Joko", "joko@gmail.com", 22
+                "Joko", "joko@gmail.com", 22, Gender.MALE
         );
 
         Mockito.when(customerDao.existsPersonWithEmail(request.email()))
@@ -197,13 +195,13 @@ class CustomerServiceTest {
         // GIVEN
         int id = 1;
         Customer customer = new Customer(
-                "johan", "johan@gmail.com",20
-        );
+                "johan", "johan@gmail.com",20,
+                Gender.MALE);
         Mockito.when(customerDao.getByCustomerId(id))
                 .thenReturn(Optional.of(customer));
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "Joko", null, null
+                "Joko", null, null, null
         );
 
         // When
@@ -226,15 +224,15 @@ class CustomerServiceTest {
         // GIVEN
         int id = 1;
         Customer customer = new Customer(
-                "johan", "johan@gmail.com",20
-        );
+                "johan", "johan@gmail.com",20,
+                Gender.MALE);
         Mockito.when(customerDao.getByCustomerId(id))
                 .thenReturn(Optional.of(customer));
 
         String newEmail = "jow@gmail.com";
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                null, newEmail, null
+                null, newEmail, null, null
         );
 
         Mockito.when(customerDao.existsPersonWithEmail(newEmail)).thenReturn(false);
@@ -259,13 +257,13 @@ class CustomerServiceTest {
         // GIVEN
         int id = 1;
         Customer customer = new Customer(
-                "johan", "johan@gmail.com",20
-        );
+                "johan", "johan@gmail.com",20,
+                Gender.MALE);
         Mockito.when(customerDao.getByCustomerId(id))
                 .thenReturn(Optional.of(customer));
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                null, null, 100
+                null, null, 100, null
         );
 
         // When
@@ -288,15 +286,15 @@ class CustomerServiceTest {
         // GIVEN
         int id = 1;
         Customer customer = new Customer(
-                "johan", "johan@gmail.com",20
-        );
+                "johan", "johan@gmail.com",20,
+                Gender.MALE);
         Mockito.when(customerDao.getByCustomerId(id))
                 .thenReturn(Optional.of(customer));
 
         String newEmail = "jow@gmail.com";
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                null, newEmail, null
+                null, newEmail, null, null
         );
 
         Mockito.when(customerDao.existsPersonWithEmail(newEmail)).thenReturn(true);
@@ -316,13 +314,13 @@ class CustomerServiceTest {
         // GIVEN
         int id = 1;
         Customer customer = new Customer(
-                "johan", "johan@gmail.com",20
-        );
+                "johan", "johan@gmail.com",20,
+                Gender.MALE);
         Mockito.when(customerDao.getByCustomerId(id))
                 .thenReturn(Optional.of(customer));
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                customer.getName(), customer.getEmail(), customer.getAge()
+                customer.getName(), customer.getEmail(), customer.getAge(), customer.getGender()
         );
 
         // When
