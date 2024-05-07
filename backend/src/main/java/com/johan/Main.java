@@ -30,8 +30,8 @@ public class Main {
             String lastname = faker.name().lastName();
 
             Customer customer = new Customer(
-                    firstname.toLowerCase() + "." + lastname.toLowerCase()+"@johan.com",
                     firstname+ " " + lastname,
+                    firstname.toLowerCase() + "." + lastname.toLowerCase()+"@johan.com",
                     random.nextInt(16,99)
             );
             customerRepository.save(customer);
